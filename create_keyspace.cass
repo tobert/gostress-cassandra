@@ -1,0 +1,20 @@
+
+create keyspace gostress
+  with placement_strategy = 'SimpleStrategy'
+  and strategy_options = {replication_factor : 3}
+  and durable_writes = true;
+
+use gostress;
+
+create column family stressful
+  with column_type = 'Standard'
+  and default_validation_class = 'BytesType'
+  and key_validation_class = 'BytesType'
+  and caching = 'KEYS_ONLY'
+  and read_repair_chance = 0.1
+  and gc_grace = 5184000
+  and replicate_on_write = true
+  and compaction_strategy = 'org.apache.cassandra.db.compaction.LeveledCompactionStrategy'
+  and compaction_strategy_options={'sstable_size_in_mb': 256}
+  and bloom_filter_fp_chance = 0.01;
+
