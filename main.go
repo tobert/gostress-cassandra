@@ -52,7 +52,7 @@ func main() {
 	pool, err := gossie.NewConnectionPool(ServerList, "gostress", gossie.PoolOptions{Size: PoolSizeOpt, Timeout: 30000})
 	if err != nil {
 		fmt.Sprintf("Error connecting to cluster: %v\n", err)
-		return
+		os.Exit(1)
 	}
 
 	switch ModeOpt {
