@@ -40,7 +40,7 @@ func readLoader(server string, pool gossie.ConnectionPool, out chan string, died
 	died <- true
 }
 
-func readLoad(pool gossie.ConnectionPool) {
+func readLoad(pool gossie.ConnectionPool, servers []string) {
 
 	out := make(chan string)
 	died := make(chan bool)
@@ -56,7 +56,7 @@ func readLoad(pool gossie.ConnectionPool) {
 	fmt.Printf("server,count,latency,bytes\n")
 
 	// one reader per server in the cluster seems to be parallel enough
-	for _, server := range *ServerList {
+	for _, server := range servers {
 		go readLoader(server, pool, out, died)
 	}
 

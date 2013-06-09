@@ -25,8 +25,8 @@ func generateColumns(prefix string, count int64) []*gossie.Column {
 	return columns
 }
 
-func writeLoadData(pool gossie.ConnectionPool) {
-	for _, server := range *ServerList {
+func writeLoadData(pool gossie.ConnectionPool, servers []string) {
+	for _, server := range servers {
 		fmt.Printf("%s - creating row\n", server)
 		columns := generateColumns(server, 1e3)
 		row := gossie.Row{[]byte(server), columns}
