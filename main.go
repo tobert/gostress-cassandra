@@ -4,11 +4,11 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"github.com/carloscm/gossie/src/gossie"
 	"io"
 	"os"
-	"strings"
 	"runtime"
-	"github.com/carloscm/gossie/src/gossie"
+	"strings"
 )
 
 var ServerList []string
@@ -56,9 +56,12 @@ func main() {
 	}
 
 	switch ModeOpt {
-		case "read":  readLoad(pool, ServerList)
-		case "write": writeLoadData(pool, ServerList)
-		default: {
+	case "read":
+		readLoad(pool, ServerList)
+	case "write":
+		writeLoadData(pool, ServerList)
+	default:
+		{
 			fmt.Printf("Invalid -mode value: '%s'\n", ModeOpt)
 		}
 	}
