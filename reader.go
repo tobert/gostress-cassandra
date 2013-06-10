@@ -21,7 +21,7 @@ func readLoader(server string, pool gossie.ConnectionPool, out chan string, died
 			fmt.Printf("Error? %s -> %v\n", server, err)
 			time.Sleep(time.Second * 1)
 			continue
-		} else {
+		} else if data != nil {
 			for _, val := range data.Columns {
 				// ttl + timestamp is 12 bytes, this is just an approximation
 				bytesRead = bytesRead + len(val.Name) + len(val.Value) + 12

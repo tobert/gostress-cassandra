@@ -19,7 +19,7 @@ var ModeOpt string
 
 func init() {
 	flag.StringVar(&ListOpt, "list", "default", "list of server:port to use")
-	flag.IntVar(&PoolSizeOpt, "connections", 128, "number of connections to use in the pool")
+	flag.IntVar(&PoolSizeOpt, "connections", 20, "number of connections to use in the pool")
 	flag.IntVar(&StepOpt, "step", 10, "number of samples to average before output")
 	flag.StringVar(&ModeOpt, "mode", "read", "which mode to run the tool in (read|write)")
 
@@ -47,7 +47,7 @@ func readList(path string) (list []string) {
 }
 
 func main() {
-	runtime.GOMAXPROCS(11)
+	runtime.GOMAXPROCS(20)
 
 	pool, err := gossie.NewConnectionPool(ServerList, "gostress", gossie.PoolOptions{Size: PoolSizeOpt, Timeout: 30000})
 	if err != nil {
